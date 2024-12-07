@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carta Romántica</title>
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(to bottom, #fbd6d2, #ff9a9e);
+      color: #333;
+      font-family: 'Georgia', serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .card {
+      text-align: center;
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      max-width: 400px;
+      z-index: 10;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 2em;
+      color: #e63946;
+    }
+
+    p {
+      margin-top: 10px;
+      font-size: 1.2em;
+      line-height: 1.6;
+      opacity: 1;
+      transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+    }
+
+    p.hidden {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 1em;
+      color: white;
+      background-color: #e63946;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #c02633;
+    }
+
+    .heart {
+      width: 50px;
+      height: 50px;
+      position: absolute;
+      background: #ff6b81;
+      transform: rotate(-45deg);
+      animation: float 6s infinite ease-in-out;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      width: 50px;
+      height: 50px;
+      background: #ff6b81;
+      border-radius: 50%;
+      position: absolute;
+    }
+
+    .heart::before {
+      top: -25px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: 25px;
+      top: 0;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(-45deg);
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-200px) rotate(-45deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Para Ti, Mariana ❤️</h1>
+    <p id="message" class="hidden">Haz clic en el botón para leer algo especial.</p>
+    <button onclick="revealMessage()">Descúbrelo</button>
+  </div>
+
+  <script>
+    function revealMessage() {
+      const message = document.getElementById('message');
+      message.textContent = "Eres la razón de mi felicidad. Gracias por siempre estar conmigo toda la vida. 🌹";
+      message.classList.remove('hidden'); // Elimina la clase para mostrar el mensaje
+    }
+
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = Math.random() * 3 + 3 + 's';
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 6000);
+    }
+
+    setInterval(createHeart, 400);
+  </script>
+</body>
+</html>
